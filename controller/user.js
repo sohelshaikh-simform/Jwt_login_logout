@@ -6,17 +6,21 @@ const bcrypt=require("bcrypt");
 
 const register=async (req,res)=>{
     try{
+        // if(!req.body.email||!req.body.){
+
+        // }
         const existUser= await userModel.findOne({email:req.body.email});
         if(existUser){
-            res.status(400).json({message:"user Already exit"});
+            return res.status(400).json({message:"user Already exit"});
         }
         const salt = await bcrypt.genSalt(10);
         const hasPassword = await bcrypt.hash(req.body.password, salt);
         const newUser= await userModel.create({
-            name: req.body.name,
+            username: req.body.username,
             email: req.body.email,
             password: hasPassword
         })
+        console.log(newUser);
         const token=jwt.sign({email:newUser.email,id:newUser._id},"secretkey")
         res.status(201).json({
             user:newUser,
