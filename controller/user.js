@@ -56,4 +56,3 @@ const getData=(req,res)=>{
     res.status(200).json({message:"Sucees",id:req.userId})
 }
 module.exports={register,login,getData}
-// Secretkey=24tjzfVSJtdi0GRMJKGolggdB7c
