@@ -1,4 +1,3 @@
-// const user = require("../models/user");
 const userModel=require("../models/user")
 const jwt=require("jsonwebtoken")
 const bcrypt=require("bcrypt");
@@ -7,9 +6,6 @@ require('dotenv').config()
 
 const register=async (req,res)=>{
     try{
-        // if(!req.body.email||!req.body.){
-
-        // }
         const existUser= await userModel.findOne({email:req.body.email});
         if(existUser){
             return res.status(400).json({message:"user Already exit"});
